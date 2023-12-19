@@ -3,7 +3,9 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-set(CMAKE_PREFIX_PATH "C:/src/vcpkg/installed/x64-windows/share")
+#set(CMAKE_PREFIX_PATH "C:/src/vcpkg/installed/x64-windows/share")
+
+set(CMAKE_TOOLCHAIN_FILE "C:/src/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -14,7 +16,7 @@ endif()
 project ("currency-info")
 
 # Add source to this project's executable.
-add_executable (currency-info "currency-info.cpp" "currency-info.h")
+add_executable (currency-info "main.cpp" "main.h" "currencyretriever.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET currency-info PROPERTY CXX_STANDARD 20)
