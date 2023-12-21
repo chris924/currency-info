@@ -12,46 +12,11 @@ size_t WriteCallBack(void* contents, size_t size, size_t nmemb, std::string* out
 
 
 
-double CurrencyRetriever::retrieve()
+double CurrencyRetriever::retrieve(const UserInput& userInput)
 {
-    std::string currency_input;
-    const std::size_t currency_input_size = 3;
-    currency_input.reserve(currency_input_size);
-    do
-    {
-        std::cout << "Please provide a currency to convert the rate from EUR. (USD, GBP, CAD, AUD, JPY):\n";
-
-        std::getline(std::cin, currency_input);
-
-        if (currency_input.length() != 3)
-        {
-            std::cerr << "Please provide a valid currency. For example: EUR, USD, GBP...";
-        }
-
-    } while (currency_input.length() > currency_input_size);
-
-
-
-
-    std::string api_key;
-    std::string api_endpoint = "http://data.fixer.io/api/latest";
-    const std::size_t api_key_size = 50;
-    api_key.reserve(api_key_size);
-
-    do
-    {
-        std::cout << "Please provide your API Key from https://fixer.io :\n";
-
-        std::getline(std::cin, api_key);
-
-        if (api_key.length() > api_key_size)
-        {
-            std::cerr << "The input is too long. Maximum length is :" << api_key_size << "characters \n";
-        }
-    } while (api_key.length() > api_key_size);
    
-
-    std::string api_url = api_endpoint + "?access_key=" + api_key;
+    std::string api_endpoint = "http://data.fixer.io/api/latest";
+    std::string api_url = api_endpoint + "?access_key=" + userInput.user_API_key;
     
 
     CURL* curl = curl_easy_init();
@@ -77,9 +42,9 @@ double CurrencyRetriever::retrieve()
             bool success = response_json["success"];
             std::string date = response_json["date"];
             std::string base_currency = response_json["base"];
-            double rate_user = response_json["rates"][currency_input];
+            double rate_user = response_json["rates"][userInput.user_currency];
 
-            success ? std::cout << "Date: " + date + "\n" + "Base Currency: " + base_currency + "\n" + "Rate in " + currency_input + ": " + std::to_string(rate_user) + "\n"
+            success ? std::cout << "Date: " + date + "\n" + "Base Currency: " + base_currency + "\n" + "Rate to " + userInput.user_currency + ": " + std::to_string(rate_user) + "\n"
                 : std::cout << "Success is false!";
 
 

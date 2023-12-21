@@ -16,7 +16,7 @@ endif()
 project ("currency-info")
 
 # Add source to this project's executable.
-add_executable (currency-info "main.cpp" "main.h" "currencyretriever.cpp")
+add_executable (currency-info "main.cpp" "main.h" "currencyretriever.cpp" "userinput.h" "userinput.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET currency-info PROPERTY CXX_STANDARD 20)

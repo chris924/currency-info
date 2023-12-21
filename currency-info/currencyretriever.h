@@ -5,10 +5,11 @@
 #include <string>
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
+#include "userinput.h"
 
 
 
 class CurrencyRetriever {
 public:
-	double retrieve();
+	double retrieve(const UserInput& userInput);
 };

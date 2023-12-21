@@ -3,14 +3,18 @@
 
 #include "main.h"
 #include "currencyretriever.h"
+#include "userinput.h"
 
 int main()
 {
      std::cout << "Welcome to my Currency Retriever Program!\n";
 
     CurrencyRetriever currencyretriever;
+    UserInput userInput;
 
-    double result = currencyretriever.retrieve();
+    userInput.retrieve();
+
+    double result = currencyretriever.retrieve(userInput);
 
     if(result !=0)
     {
