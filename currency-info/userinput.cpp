@@ -14,10 +14,28 @@ void UserInput::retrieve()
 
         if (user_currency.length() != 3)
         {
+            
             std::cerr << "Please provide a valid currency. For example: EUR, USD, GBP...";
         }
 
     } while (user_currency.length() != currency_input_size);
+
+
+    std::cout << "Please provide the amount in EUR you want to convert.\n";
+   do
+   {
+        std::cin >> user_amount;
+        std::cin.clear();
+        std::cin.ignore();
+        if (std::cin.fail())
+        {
+            std::cerr << "Please provide a valid amount.";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        }
+
+
+    } while (std::cin.fail());
 
 
 
@@ -34,6 +52,7 @@ void UserInput::retrieve()
 
         if (user_API_key.length() > api_key_size)
         {
+            
             std::cerr << "The input is too long. Maximum length is :" << api_key_size << "characters \n";
             std::cout << "Provide a valid API key.\n";
         }

@@ -44,8 +44,19 @@ double CurrencyRetriever::retrieve(const UserInput& userInput)
             std::string base_currency = response_json["base"];
             double rate_user = response_json["rates"][userInput.user_currency];
 
-            success ? std::cout << "Date: " + date + "\n" + "Base Currency: " + base_currency + "\n" + "Rate to " + userInput.user_currency + ": " + std::to_string(rate_user) + "\n"
-                : std::cout << "Success is false!";
+            if (success)
+            {
+                std::cout << "Date: " + date + "\n" + "Base Currency: " + base_currency + "\n" + "Rate to "
+                    + userInput.user_currency + ": " + std::to_string(rate_user) + "\n";
+
+                std::cout << "Your amount in EUR: " << userInput.user_amount << " is " << userInput.user_amount * rate_user << " in " << userInput.user_currency << "\n";
+            }
+            else
+            {
+               std::cout << "Success response is false!";
+            }
+
+               
 
 
         }
